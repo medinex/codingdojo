@@ -7,7 +7,7 @@
     <ProjectGuid>{8EDF4429-251A-416D-BB68-93F227191BCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NUnit.TestBasicCalculator</RootNamespace>
+    <RootNamespace>NUnit.Tests1</RootNamespace>
     <AssemblyName>NUnit.Tests1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -37,16 +37,16 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestBasicCalculator.cs" />
+    <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BasicCalculatorExample\BasicCalculatorExample.csproj">
-      <Project>{97316eb4-9a69-4204-8202-3797686453d0}</Project>
-      <Name>BasicCalculatorExample</Name>
+    <ProjectReference Include="..\FizzBuzzKata\FizzBuzzKata.csproj">
+      <Project>{013eb2c4-86cc-4d8c-9f5e-3d5644db82be}</Project>
+      <Name>FizzBuzzKata</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

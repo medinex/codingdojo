@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BasicCalculatorExample;
+
 
 namespace NUnit.TestBasicCalculator
 {
@@ -11,10 +13,35 @@ namespace NUnit.TestBasicCalculator
     public class TestBasicCalculator
     {
         [Test]
-        public void TestMethod()
+        public void TestSimpleIntegerAddition()
         {
-            // TODO: Add your test code here
-            Assert.Pass("Your first passing test");
+            var c = new Calculator();
+            Assert.AreEqual(3, c.Addition(1, 2));
+            //Assert.Pass("Your first passing test");
+        }
+
+        [Test]
+        public void TestSimpleIntegerAddition2()
+        {
+            var c = new Calculator();
+            Assert.AreEqual(11, c.Addition(5, 6));
+            //Assert.Pass("Your first passing test");
+        }
+
+        [Test]
+        public void TestSimpleIntegerAddition3()
+        {
+            var c = new Calculator();
+            Assert.AreEqual(-3, c.Addition(-1, -2));
+            //Assert.Pass("Your first passing test");
+        }
+
+        [Test]
+        public void TestSimpleIntegerAddition4()
+        {
+            var c = new Calculator();
+            Assert.AreEqual(-1, c.Addition(1, -2));
+            //Assert.Pass("Your first passing test");
         }
     }
 }
