@@ -35,9 +35,15 @@ namespace NUnit.FizzBuzzTest
         }
 
         [Test]
-        public void TestMethodException()
+        public void TestMethodExceptionIfNegativeNumber()
         {
             Assert.Throws<ArgumentException>(()=> FizzBuzz.buzzing(-1));
+        }
+
+        [Test]
+        public void TestMethodExceptionIfZero()
+        {
+            Assert.Throws<ArgumentException>(() => FizzBuzz.buzzing(0));
         }
 
 

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.StackKataTest", "NUnit.StackKataTest\NUnit.StackKataTest.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackKataLibrary", "StackKataLibrary\StackKataLibrary.csproj", "{37EEC3DF-799A-49DF-B4CF-C75FE7C67C80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37EEC3DF-799A-49DF-B4CF-C75FE7C67C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37EEC3DF-799A-49DF-B4CF-C75FE7C67C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37EEC3DF-799A-49DF-B4CF-C75FE7C67C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37EEC3DF-799A-49DF-B4CF-C75FE7C67C80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B0BCA9C-5A5A-4055-9FAA-E196E057E93F}
+	EndGlobalSection
+EndGlobal
