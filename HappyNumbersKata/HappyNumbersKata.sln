@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyNumbersKata", "HappyNumbersKata\HappyNumbersKata.csproj", "{CBD5B4D2-47C6-48DB-B517-BA08E960334C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Test1", "NUnit.Test1\NUnit.Test1.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBD5B4D2-47C6-48DB-B517-BA08E960334C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD5B4D2-47C6-48DB-B517-BA08E960334C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD5B4D2-47C6-48DB-B517-BA08E960334C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD5B4D2-47C6-48DB-B517-BA08E960334C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {611184F3-AC7A-4071-88F4-821DF2B6D1A3}
+	EndGlobalSection
+EndGlobal

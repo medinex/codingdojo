@@ -40,7 +40,7 @@ namespace GameOfLifeKata
             return count;
         }
 
-        public bool IsEmpty()
+        private bool IsEmpty()
         {
             int cnt = 0;
             for (int y = 0; y < _matrix.GetLength(1); y++)
@@ -55,7 +55,7 @@ namespace GameOfLifeKata
             return cnt <= 0;
         }
 
-            public void Evolve()
+        public void Evolve()
         {
             var temp = _matrix.Clone() as int[,];
             
