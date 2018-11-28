@@ -8,6 +8,18 @@ namespace PacManKata
 {
     public class Game
     {
+        Level _level = new Level();
+        Board _board;
 
+        public Game()
+        {
+            _board = new Board(_level);
+        }
+
+        public string Show()
+        {
+            Console.Clear();
+            return _board.Level.Show();
+        }
     }
 }

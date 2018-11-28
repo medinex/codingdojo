@@ -8,38 +8,20 @@ namespace PacManKata
 {
     public class Board
     {
-        BoardElement[,] grid;
-        String dot;
-        String wall;
-        Actor actor;
+        private Level _level;
 
-        public Board(int x, int y)
+        public Level Level
         {
-            grid = new BoardElement[x, y];
-            InitLevet1();
+            get { return _level; }
+            set { _level = value; }
         }
 
-        private void InitLevet1()
+
+        public Board(Level level)
         {
-
-            var level1 = new char[,]
-            {
-                { '╔', '═' },
-                { '╔', '═' },
-            };
-            //this = level1;
-
-
-
+            _level = level;
         }
 
-        //public operator = (char[,])
-        //    {
-        //    }
 
-        public void tick( int inputKey)
-        {
-
-        }
     }
 }

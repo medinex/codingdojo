@@ -46,6 +46,7 @@
     <Compile Include="Actor.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="BoardElement.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameMaster.cs" />
     <Compile Include="Program.cs" />
