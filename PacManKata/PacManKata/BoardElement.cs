@@ -8,6 +8,10 @@ namespace PacManKata
 {
     public class BoardElement
     {
+
+        int posX;
+        int posY;
+
         public char Representation { get; set; }
 
         public bool CanMove { get; set; }
@@ -15,7 +19,9 @@ namespace PacManKata
         public BoardElement(char c)
         { Representation = c; }
 
-        
+        public BoardElement()
+        {
+        }
 
         public virtual bool CanEat(BoardElement element)
         {
