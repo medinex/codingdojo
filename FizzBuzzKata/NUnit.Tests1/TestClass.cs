@@ -28,7 +28,6 @@ namespace NUnit.FizzBuzzTest
         [TestCase(13, ExpectedResult = "13")]
         [TestCase(14, ExpectedResult = "14")]
         [TestCase(15, ExpectedResult = "fizzbuzz")]
-      
         public string TestMethod(int a)
         {
             return FizzBuzz.buzzing(a);

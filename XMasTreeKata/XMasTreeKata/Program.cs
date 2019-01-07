@@ -12,39 +12,29 @@ namespace XMasTreeKata
         {
             var c = new ChristmasTree();
             var i = 0;
+            int minSize = 3;
+            int maxSize = 10;
+            int xPos = 3;
+            int yPos = maxSize + 1;
 
-            
-            foreach (var item in c.Draw(5, true))
-            {
-                Console.WriteLine(item);
-            }
-
-            var currenPos =  Tuple.Create(0,0);
+            var currenPos = Tuple.Create(0, 0);
             var random = new Random();
+
+            var ww = new WinterWonderland();
             for (int treeCount = 0; treeCount < 5; treeCount++)
-            {               
-                var randomSize = random.Next(2, 10);
-                var str = c.Draw(randomSize, true);
-                foreach (var item in str)
-                {
-                    i++;
-                    var leftPos = Console.CursorLeft;
-                    Console.SetCursorPosition(currenPos.Item2, currenPos.Item1 + i);
-                    Console.WriteLine(item);
-                }
+            {
+                var randomSize = random.Next(minSize, maxSize);
+                var tree = c.Draw(randomSize, true);
+                ww.Add(c);
+                   
 
-                currenPos = Tuple.Create(randomSize + currenPos.Item2, str.Count + currenPos.Item1);
-
-                Console.ReadKey();
             }
+                ww.Draw();
 
+            Console.ReadKey();
         }
 
-        public string buildTree()
-        {
-
-            return "";
-        }
+       
 
     }
 }
