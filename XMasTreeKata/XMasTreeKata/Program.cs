@@ -10,10 +10,9 @@ namespace XMasTreeKata
     {
         static void Main(string[] args)
         {
-            var c = new ChristmasTree();
             var i = 0;
-            int minSize = 3;
-            int maxSize = 10;
+            int minSize = 10;
+            int maxSize = 20;
             int xPos = 3;
             int yPos = maxSize + 1;
 
@@ -24,7 +23,8 @@ namespace XMasTreeKata
             for (int treeCount = 0; treeCount < 5; treeCount++)
             {
                 var randomSize = random.Next(minSize, maxSize);
-                var tree = c.Draw(randomSize, true);
+                var c = new ChristmasTree(randomSize, true);
+                var tree = c.Draw();
                 ww.Add(c);
                    
 

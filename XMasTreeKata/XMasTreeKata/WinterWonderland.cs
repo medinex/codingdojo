@@ -12,16 +12,21 @@ namespace XMasTreeKata
 
         internal void Draw()
         {
-            var maxHeight = _forest.Max(t=> t.GetHeight());
-            var maxWidth = _forest.Max(s => s.GetWidth());
+            int maxHeight = _forest.Max(t=> t.GetHeight());
+            int maxWidth = _forest.Max(s => s.GetWidth());
 
             var builder = new StringBuilder();
             foreach (var tree in _forest)
             {
-                for (int i = 0; i < maxHeight; i++)
+                var listOfTreeElements = tree.DrawInBlock(maxWidth, maxHeight);
+
+                foreach (var item in listOfTreeElements)
                 {
-                    //builder.Append(tree[i]);
+                    builder.AppendLine(item);
                 }
+
+    
+                var currentWidth = tree.GetWidth();
                 builder.AppendLine();
             }
 
