@@ -23,7 +23,7 @@ namespace DiffKata.Tests
 
         [TestCase(3, 0, "nine")]
         [TestCase(3, 1, "minus one")]
-        [TestCase(3, 1, "minus one")]
+//        [TestCase(3, 1, "minus one")]
         public void ParseToListShouldDoTheThing(int lineHead, int whichList, string textHead)
         {
 
@@ -41,12 +41,13 @@ namespace DiffKata.Tests
         }
 
         [Test]
-        public void TEstListPArser()
+        public void TestListParser()
         {
-            var ret = _m.ParseToList(NUnit.Tests1.Properties.Resource1.InputString);
+             _m.ParseToList(NUnit.Tests1.Properties.Resource1.InputString);
 
 
-            Assert.That(ret[4], Is.EqualTo("minus one"));
+            Assert.That(_m.HeadStringList[3], Is.EqualTo("minus one"));
+            Assert.That(_m.BranchStringList[2], Is.EqualTo("eight"));
 
         }
 
