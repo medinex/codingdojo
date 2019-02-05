@@ -62,7 +62,7 @@ namespace NUnit.Tests1.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to the solar system
-        ///the numer of planets is
+        ///the number of planets is
         ///&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
         ///nine
         ///minus one
@@ -74,6 +74,57 @@ namespace NUnit.Tests1.Properties {
         internal static string InputString {
             get {
                 return ResourceManager.GetString("InputString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the solar system
+        ///the number of planets is
+        ///&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+        ///nine
+        ///=======
+        ///eight
+        ///minus one
+        ///&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+        ///earth is the 3rd planet.
+        /// </summary>
+        internal static string ReverseString {
+            get {
+                return ResourceManager.GetString("ReverseString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the solar system
+        ///the number of planets is
+        ///&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+        ///nine
+        ///minus one
+        ///=======
+        ///eight
+        ///hello world
+        ///&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+        ///earth is the 3rd planet.
+        /// </summary>
+        internal static string SecondTestString {
+            get {
+                return ResourceManager.GetString("SecondTestString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+        ///nine
+        ///minus one
+        ///=======
+        ///eight
+        ///hello world
+        ///&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+        ///earth is the 3rd planet.
+        /// </summary>
+        internal static string StartsWithHead {
+            get {
+                return ResourceManager.GetString("StartsWithHead", resourceCulture);
             }
         }
     }

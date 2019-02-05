@@ -13,8 +13,17 @@ namespace DiffKata.ViewModel
 
         public Dictionary<long, string> BranchStringList { get; set; } = new Dictionary<long, string>();
 
+        public List<string> HeadlistValues => HeadStringList.Values.ToList<string>();
+        public List<string> BranchlistValues => BranchStringList.Values.ToList<string>();
+
+
         public string InputText { get; set; }
         enum flag { head, branch, both }
+
+        public bool IsConflict(int startLine)
+        {
+            return HeadStringList[startLine].CompareTo(BranchStringList[startLine]) != 0;
+        }
 
         public void ParseToList(string input)
         {

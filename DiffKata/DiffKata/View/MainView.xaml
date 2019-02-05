@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DiffKata.View"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="450" Width="800"
+        xmlns:dd="clr-namespace:DiffKata.DesignData"
+        d:DataContext="{d:DesignInstance {x:Type dd:KataViewDesignModel}, IsDesignTimeCreatable=True}">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0" Name="HeadList" ItemsSource="{Binding HeadlistValues}">
+            
+        </ListView>
+
+        <ListView Grid.Column="1" Name="BranchList" ItemsSource="{Binding BranchlistValues}">
+
+
+        </ListView>
+
 
     </Grid>
 </Window>

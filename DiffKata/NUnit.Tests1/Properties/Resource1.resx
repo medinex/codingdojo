@@ -119,12 +119,45 @@
   </resheader>
   <data name="InputString" xml:space="preserve">
     <value>the solar system
-the numer of planets is
+the number of planets is
 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 nine
 minus one
 =======
 eight
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+earth is the 3rd planet</value>
+  </data>
+  <data name="ReverseString" xml:space="preserve">
+    <value>the solar system
+the number of planets is
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+nine
+=======
+eight
+minus one
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+earth is the 3rd planet</value>
+  </data>
+  <data name="SecondTestString" xml:space="preserve">
+    <value>the solar system
+the number of planets is
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+nine
+minus one
+=======
+eight
+hello world
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+earth is the 3rd planet</value>
+  </data>
+  <data name="StartsWithHead" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+nine
+minus one
+=======
+eight
+hello world
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
 earth is the 3rd planet</value>
   </data>
