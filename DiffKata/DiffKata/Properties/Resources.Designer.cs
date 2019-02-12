@@ -61,7 +61,7 @@ namespace DiffKata.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to InputString	the solar system
+        ///   Looks up a localized string similar to the solar system
         ///the number of planets is
         ///&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
         ///nine

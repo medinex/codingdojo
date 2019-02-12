@@ -134,6 +134,19 @@ namespace DiffKata.Tests
         }
 
         [Test]
+        public void ListsShouldBeFilled()
+        {
+            _m.ParseToList("dlkföjadflö kajsd fölkas dfölkas dfölask<<<<<<<<< <> >>>>>>>>>>>>>> lödfjd ljh\n" +
+                "dfköasjd flask j==== 0============== jd fdlök\n" +
+                "\n\nldfj ölsdajkfs alödk f");
+
+
+            Assert.That(_m.BranchlistValues.Any(), Is.True);
+            Assert.That(_m.HeadlistValues.Any(), Is.True);
+            Assert.That(_m.HeadlistValues.Count, Is.EqualTo(_m.BranchlistValues.Count));
+        }
+
+        [Test]
         public void TestEquality()
         {
             _m.ParseToList("dlkföjadflö kajsd fölkas dfölkas dfölask<<<<<<<<< <> >>>>>>>>>>>>>> lödfjd ljh\n" +
@@ -145,6 +158,24 @@ namespace DiffKata.Tests
 
         }
 
+
+        [Test]
+        public void ConflictShouldFire()
+        {
+            bool fired = false;
+            _m.PropertyChanged += (sender, evt) =>
+            {
+                if (evt.PropertyName == nameof(KataViewModel.HasConflict))
+                {
+                    fired = true;
+                }
+            };
+
+            _m.ParseToList(NUnit.Tests1.Properties.Resource1.InputString);
+
+            Assert.That(fired, Is.True, "event not fired");
+
+        }
 
     }
 }

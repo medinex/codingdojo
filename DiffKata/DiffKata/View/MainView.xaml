@@ -14,7 +14,15 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ListView Grid.Column="0" Name="HeadList" ItemsSource="{Binding HeadlistValues}">
-            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel >
+                        <TextBlock Text="Hallo">
+                            
+                        </TextBlock>
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
 
         <ListView Grid.Column="1" Name="BranchList" ItemsSource="{Binding BranchlistValues}">

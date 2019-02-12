@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,43 @@ namespace DiffKata.ViewModel
 {
     public class KataViewModel : BaseViewModel
     {
+
+        public KataViewModel()
+        {
+            ParseToList(Properties.Resources.TestString);
+        }
+        private bool _hasConflict;
+
         public Dictionary<long, string> HeadStringList { get; set; } = new Dictionary<long, string>();
 
         public Dictionary<long, string> BranchStringList { get; set; } = new Dictionary<long, string>();
 
-        public List<string> HeadlistValues => HeadStringList.Values.ToList<string>();
-        public List<string> BranchlistValues => BranchStringList.Values.ToList<string>();
+        public ObservableCollection<ConflictText> HeadlistValues = new ObservableCollection<ConflictText>();
+        public ObservableCollection<ConflictText> BranchlistValues = new ObservableCollection<ConflictText>();
 
+        public bool HasConflict
+        {
+            get
+            {
+                return _hasConflict;
+            }
+
+            set
+            {
+                if (_hasConflict != value)
+                {
+                    _hasConflict = value;
+                    FirePropertyChanged();
+                }
+            }
+        }
 
         public string InputText { get; set; }
         enum flag { head, branch, both }
 
-        public bool IsConflict(int startLine)
+        public bool IsConflict(int atLine)
         {
-            return HeadStringList[startLine].CompareTo(BranchStringList[startLine]) != 0;
+            return HeadStringList[atLine].CompareTo(BranchStringList[atLine]) != 0;
         }
 
         public void ParseToList(string input)
@@ -60,11 +84,13 @@ namespace DiffKata.ViewModel
                 {         
                     BranchStringList.Add(lineNumberRight, line);
                     lineNumberRight++;
+                    HasConflict = true;
                 }
                 else if (position == flag.head)
                 {
                     HeadStringList.Add(lineNumberLeft, line);
                     lineNumberLeft++;
+                    HasConflict = true;
                 }
                 else
                 {
@@ -75,6 +101,17 @@ namespace DiffKata.ViewModel
                     lineNumberRight++;
                 }
 
+            }
+
+            int i = 0;
+            foreach (var item in HeadStringList)
+            {
+                HeadlistValues.Add(new ConflictText() { Text = item.Value, IsConflict = IsConflict(i++)});
+            }
+            i = 0;
+            foreach (var item in BranchStringList)
+            {
+                BranchlistValues.Add(new ConflictText() { Text = item.Value, IsConflict = IsConflict(i++)});
             }
         }
 

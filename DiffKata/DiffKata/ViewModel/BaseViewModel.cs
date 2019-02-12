@@ -12,7 +12,7 @@ namespace DiffKata.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void FirePropertyChanged(ref object value, [CallerMemberName] string propertyName = "")
+        protected void FirePropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

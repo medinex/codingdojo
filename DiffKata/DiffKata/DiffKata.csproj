@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="DesignData\KataViewDesignModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ConflictText.cs" />
     <Compile Include="ViewModel\KataViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
