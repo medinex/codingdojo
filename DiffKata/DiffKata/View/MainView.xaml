@@ -8,26 +8,75 @@
         Title="MainView" Height="450" Width="800"
         xmlns:dd="clr-namespace:DiffKata.DesignData"
         d:DataContext="{d:DesignInstance {x:Type dd:KataViewDesignModel}, IsDesignTimeCreatable=True}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+    </Window.Resources>    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+            
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" Name="HeadList" ItemsSource="{Binding HeadlistValues}">
+
+        <TextBox Grid.Row="0"
+                 Grid.RowSpan="2" 
+                 Text="{Binding InputText, Delay=500, UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap"
+                 MinHeight="200"/>
+        
+        <ListView Grid.Row="1" Grid.Column="0"
+                  Name="HeadList"
+                  ItemsSource="{Binding HeadlistValues}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel >
-                        <TextBlock Text="Hallo">
-                            
-                        </TextBlock>
-                    </DockPanel>
+                    <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding LineNumber}" />
+                        <CheckBox IsChecked="{Binding IsChecked}"
+                                  Visibility="{Binding IsConflict, Converter={StaticResource VisibleIfTrueConverter}}" />
+                        <TextBox Text="{Binding Text}" 
+                             Background="{Binding Background}"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView Grid.Column="1" Name="BranchList" ItemsSource="{Binding BranchlistValues}">
+        <ListView Grid.Row="1" 
+                  Grid.Column="1"
+                  Name="BranchList"
+                  ItemsSource="{Binding BranchlistValues}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text="{Binding LineNumber}" />
+                        <CheckBox IsChecked="{Binding IsChecked}"
+                                  Visibility="{Binding IsConflict, Converter={StaticResource VisibleIfTrueConverter}}" />
+                        <TextBox Text="{Binding Text}"
+                             Background="{Binding Background}" />
+                        </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-
+        
+        <ListView Grid.Row="2"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  
+                  Name="MergeList"
+                  ItemsSource="{Binding BranchlistValues}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text="{Binding LineNumber}" />
+                        <TextBox Text="{Binding Text}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
 
 

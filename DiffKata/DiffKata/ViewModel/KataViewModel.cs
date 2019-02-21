@@ -13,16 +13,18 @@ namespace DiffKata.ViewModel
 
         public KataViewModel()
         {
-            ParseToList(Properties.Resources.TestString);
+           // ParseToList(Properties.Resources.TestString);
         }
+
         private bool _hasConflict;
+        string _inputText = Properties.Resources.TestString;
 
         public Dictionary<long, string> HeadStringList { get; set; } = new Dictionary<long, string>();
 
         public Dictionary<long, string> BranchStringList { get; set; } = new Dictionary<long, string>();
 
-        public ObservableCollection<ConflictText> HeadlistValues = new ObservableCollection<ConflictText>();
-        public ObservableCollection<ConflictText> BranchlistValues = new ObservableCollection<ConflictText>();
+        public ObservableCollection<ConflictText> HeadlistValues { get; set; } = new ObservableCollection<ConflictText>();
+        public ObservableCollection<ConflictText> BranchlistValues { get; set; } = new ObservableCollection<ConflictText>();
 
         public bool HasConflict
         {
@@ -41,7 +43,18 @@ namespace DiffKata.ViewModel
             }
         }
 
-        public string InputText { get; set; }
+        public string InputText {
+            get
+            {
+                return _inputText;
+            }
+
+            set
+            {
+                ParseToList(value);
+                _inputText = value;
+            }
+        }
         enum flag { head, branch, both }
 
         public bool IsConflict(int atLine)
@@ -51,6 +64,11 @@ namespace DiffKata.ViewModel
 
         public void ParseToList(string input)
         {
+            BranchStringList.Clear();
+            HeadStringList.Clear();
+            BranchlistValues.Clear();
+            HeadlistValues.Clear();
+
             flag position = flag.both;
             int lineNumberLeft = 0;
             int lineNumberRight = 0;
@@ -60,8 +78,6 @@ namespace DiffKata.ViewModel
             
             while ((line = stringReader.ReadLine()) != null)
             {
-              
-
                 if (line.StartsWith("<<<<<<<"))
                 {
                     position = flag.head;
@@ -106,12 +122,22 @@ namespace DiffKata.ViewModel
             int i = 0;
             foreach (var item in HeadStringList)
             {
-                HeadlistValues.Add(new ConflictText() { Text = item.Value, IsConflict = IsConflict(i++)});
+                HeadlistValues.Add(new ConflictText()
+                {
+                    LineNumber = i,
+                    Text = item.Value,
+                    IsConflict = IsConflict(i++)
+                });
             }
             i = 0;
             foreach (var item in BranchStringList)
             {
-                BranchlistValues.Add(new ConflictText() { Text = item.Value, IsConflict = IsConflict(i++)});
+                BranchlistValues.Add(new ConflictText()
+                {
+                    LineNumber = i,
+                    Text = item.Value,
+                    IsConflict = IsConflict(i++)
+                });
             }
         }
 
