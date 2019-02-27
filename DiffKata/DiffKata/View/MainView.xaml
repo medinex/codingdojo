@@ -68,15 +68,11 @@
                   Grid.ColumnSpan="2"
                   
                   Name="MergeList"
-                  ItemsSource="{Binding BranchlistValues}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Text="{Binding LineNumber}" />
-                        <TextBox Text="{Binding Text}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                  ItemsSource="{Binding Resultlist}">
+
+            <TextBox Text="{Binding Text}">
+                
+            </TextBox>
         </ListView>
 
 

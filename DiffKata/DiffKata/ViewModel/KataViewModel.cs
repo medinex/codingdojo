@@ -13,11 +13,20 @@ namespace DiffKata.ViewModel
 
         public KataViewModel()
         {
-           // ParseToList(Properties.Resources.TestString);
+           InputText = Properties.Resources.TestString;
         }
 
+        private string _text;
+
+        public string Text
+        {
+            get { return _text; }
+            set { _text = value; FirePropertyChanged(); }
+        }
+
+
         private bool _hasConflict;
-        string _inputText = Properties.Resources.TestString;
+        string _inputText = string.Empty;
 
         public Dictionary<long, string> HeadStringList { get; set; } = new Dictionary<long, string>();
 
@@ -25,6 +34,8 @@ namespace DiffKata.ViewModel
 
         public ObservableCollection<ConflictText> HeadlistValues { get; set; } = new ObservableCollection<ConflictText>();
         public ObservableCollection<ConflictText> BranchlistValues { get; set; } = new ObservableCollection<ConflictText>();
+
+        public ObservableCollection<ConflictText> Resultlist { get; set; } = new ObservableCollection<ConflictText>();
 
         public bool HasConflict
         {
@@ -53,6 +64,7 @@ namespace DiffKata.ViewModel
             {
                 ParseToList(value);
                 _inputText = value;
+                FirePropertyChanged();
             }
         }
         enum flag { head, branch, both }
@@ -122,22 +134,72 @@ namespace DiffKata.ViewModel
             int i = 0;
             foreach (var item in HeadStringList)
             {
-                HeadlistValues.Add(new ConflictText()
+                var ct = new ConflictText()
                 {
                     LineNumber = i,
                     Text = item.Value,
                     IsConflict = IsConflict(i++)
-                });
+                };
+
+                ct.PropertyChanged += Head_PropertyChanged;
+
+                HeadlistValues.Add(ct);
             }
             i = 0;
             foreach (var item in BranchStringList)
             {
-                BranchlistValues.Add(new ConflictText()
+                var ct = new ConflictText()
                 {
                     LineNumber = i,
                     Text = item.Value,
                     IsConflict = IsConflict(i++)
-                });
+                };
+
+                BranchlistValues.Add(ct);
+
+                ct.PropertyChanged += Branch_PropertyChanged;
+            }
+            FillResultList();
+        }
+
+        private void Head_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            FillResultList();
+        }
+
+        private void Branch_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            FillResultList();
+        }
+
+        private void FillResultList()
+        {
+            Resultlist.Clear();
+
+            foreach (var itemHead in HeadlistValues)
+            {
+                var itemBranch = BranchlistValues[(int)itemHead.LineNumber];
+                var ct = new ConflictText();
+                ct.LineNumber = itemHead.LineNumber;
+                ct.Text = itemHead.Text;
+                if (itemHead.IsConflict)
+                {
+                    string text="";
+                    if (itemHead.IsChecked)
+                    {
+                        text = itemHead.Text;
+                    }
+
+                    if (itemBranch.IsChecked)
+                    {
+                        text = itemBranch.Text; 
+                    }
+
+                    ct.Text = text;
+                    
+                }
+                Text = Text;
+
             }
         }
 
