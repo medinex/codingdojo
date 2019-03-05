@@ -16,6 +16,8 @@ namespace DiffKata.DesignData
         {
             ParseToList(Properties.Resources.TestString);
 
+            Text = "Test";
+
         }
     }
 }

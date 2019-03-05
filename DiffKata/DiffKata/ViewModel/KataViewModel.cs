@@ -185,20 +185,27 @@ namespace DiffKata.ViewModel
                 if (itemHead.IsConflict)
                 {
                     string text="";
-                    if (itemHead.IsChecked)
+                    
+                    if (itemHead.IsChecked && itemBranch.IsChecked)
+                    {
+                        text += itemHead.Text + Environment.NewLine + itemBranch.Text;
+                    }
+
+                    else if (itemHead.IsChecked)
                     {
                         text = itemHead.Text;
                     }
 
-                    if (itemBranch.IsChecked)
+
+                    else if (itemBranch.IsChecked)
                     {
-                        text = itemBranch.Text; 
+                        text += itemBranch.Text; 
                     }
 
                     ct.Text = text;
-                    
                 }
-                Text = Text;
+                
+                Resultlist.Add(ct);
 
             }
         }

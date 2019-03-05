@@ -62,19 +62,20 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        
+
         <ListView Grid.Row="2"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
-                  
                   Name="MergeList"
                   ItemsSource="{Binding Resultlist}">
-
-            <TextBox Text="{Binding Text}">
-                
-            </TextBox>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text="{Binding Text}"
+                             Background="{Binding Background}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-
-
     </Grid>
 </Window>
