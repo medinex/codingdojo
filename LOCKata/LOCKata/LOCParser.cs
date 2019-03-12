@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,19 +17,95 @@ namespace LOCKata
             Parse();
         }
 
+
+        public string DeleteComments(string code)
+        {
+            var cleanCode = string.Empty;
+
+            var so = new StringSplitOptions();
+            foreach (var split in code.Split(new String[] { "/*" }, so))
+            {
+                foreach(var splitEnd in split.Split(new String[] { "*/"}, so)){
+                    code.Remove(code.IndexOf(splitEnd), splitEnd.Length);
+                }
+            }
+
+
+            string start = "";
+            int startIndex = -1;
+            int endIndex = -1;
+            int index = 0;
+
+            code.Split()
+
+            foreach (char c in code)
+            {
+                if (c == '/')
+                    start += c;
+                else if (c == '*')
+                    start += c;
+                else
+                    start = String.Empty;
+
+                if (start == "/*")
+                {
+                    start = String.Empty;
+                    startIndex = index;
+                }
+                    
+
+                if (c == '*')
+                    start += c;
+                else if (c == '/')
+                    start += c;
+                else
+                    start = String.Empty;
+
+                if (start == "/*")
+                    startIndex = index;
+
+
+            }
+
+            using (var reader = new StringReader(code))
+            {
+                //var x = reader.
+                if (code.StartsWith("/*"))
+                {
+                    if (code.Contains("*/"))
+                    {
+                        code = code.Remove(0, code.IndexOf("*/"));
+                    }
+                }
+            }
+
+            return code;
+        }
+
         private void Parse()
         {
-            
             var list = _text.Split('\n');
             LinesTotal = list.Count();
 
+            var linesOfCode = 0;
+
+            bool commentBlock = false;
+
             foreach (var item in list)
             {
-                var linesWithoutWhitespaces = item.Trim();
+                var linesWithoutWhitespaces = item.Trim();              
 
-                if (!linesWithoutWhitespaces.StartsWith("//"))
+                if (commentBlock && linesWithoutWhitespaces.Contains("*/"))
                 {
+                    commentBlock = false;
+                    continue;
+                }
 
+                if (!linesWithoutWhitespaces.StartsWith("//") ||
+                    !String.IsNullOrEmpty(linesWithoutWhitespaces) ||
+                    !commentBlock)
+                {
+                    linesOfCode++;
                 }
 
             }

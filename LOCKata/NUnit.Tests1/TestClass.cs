@@ -30,5 +30,24 @@ namespace NUnit.Tests1
             Assert.AreEqual(18, test.LinesTotal);
             Assert.AreEqual(14, test.LinesOfCode);
         }
+
+        [Test]
+        public void TestCleaner()
+        {
+
+            var code = "lödfsfj ölskdjf asfkld /*ödfslkjaskdljf as*/ l kja söldkfjj sd" +
+                        "sdf ajsdlfj asdflö ölfdka jsöfd;// dsfäölk asldkj;";
+
+            var result = "lödfsfj ölskdjf asfkld  l kja söldkfjj sd" +
+                        "sdf ajsdlfj asdflö ölfdka jsöfd;";
+
+            var test = new LOCParser(code);
+
+            var r = test.DeleteComments(code);
+            Assert.AreEqual(r, result);
+
+
+
+        }
     }
 }
