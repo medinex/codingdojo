@@ -12,7 +12,7 @@ namespace NUnit.Tests1
     public class TestClass
     {
         [Test]
-        public void TestParser()
+        public void TestBlockParser()
         {
             var test = new LOCParser("/*alabala*/");
             
@@ -21,7 +21,17 @@ namespace NUnit.Tests1
         }
 
         [Test]
-        public void TestParser2()
+        public void TestSingleLineComment()
+        {
+            var test = new LOCParser("adliasjdkljd//alksdjaslkdjaskljdklasdj");
+
+            Assert.AreEqual(1, test.LinesTotal);
+            Assert.AreEqual(1, test.LinesOfCode);
+        }
+
+
+        [Test]
+        public void TestResourceCode()
         {
             var code = NUnit.Tests1.Properties.Resource.Test1;
 
@@ -45,6 +55,38 @@ namespace NUnit.Tests1
 
             var r = test.DeleteComments(code);
             Assert.AreEqual(r, result);
+
+
+
+        }
+
+        [Test]
+        public void TestCleanerInEmptyText()
+        {
+            var code = "";
+
+            var result = "";
+
+            var test = new LOCParser(code);
+
+            var r = test.DeleteComments(code);
+            Assert.AreEqual(r, result);
+        }
+
+        [Test]
+        public void TestCleanerInText()
+        {
+
+            var code = "lödfsfj ölskdjf asfkld \"/*ödfslkjaskdljf as*/\" l kja söldkfjj sd" +
+                        "sdf ajsdlfj asdflö ölfdka jsöfd;\"// dsfäölk asldkj;\"";
+
+            var result = "lödfsfj ölskdjf asfkld \"/*ödfslkjaskdljf as*/\" l kja söldkfjj sd" +
+                        "sdf ajsdlfj asdflö ölfdka jsöfd;\"// dsfäölk asldkj;\"";
+
+            var test = new LOCParser(code);
+
+            var r = test.DeleteComments(code);
+            Assert.That(r, Is.EqualTo(result));
 
 
 
