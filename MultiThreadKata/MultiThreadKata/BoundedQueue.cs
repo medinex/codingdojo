@@ -11,6 +11,7 @@ namespace MultiThreadKata
     {
         private T[] _list ;
         private readonly object _door = new object();
+        private readonly object _doorDequeue = new object();
 
         public int Size { get; set; }
         public int Count { get; set; }
@@ -35,12 +36,37 @@ namespace MultiThreadKata
         }
 
         public T Dequeue()
+
         {
-            var retVal = _list[0];
-            for (int i = 1; i < Count; i++)
-                _list[i - 1] = _list[i];
-            Count--;
+            T retVal = default(T);
+            lock (_doorDequeue)
+            {
+                while (Count == 0)
+                {
+                    Thread.Sleep(10);
+                }
+                retVal = _list[0];
+                for (int i = 1; i < Count; i++)
+                    _list[i - 1] = _list[i];
+                Count--;
+                
+            }
             return retVal;
+        }
+
+        public bool TryEnqueue( T element, int timeoutMsec)
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(timeoutMsec);
+
+
+
+            var t = Task.Run(() =>
+            {
+                Enqueue(element);
+            }, cancellationTokenSource.Token);
+
+            await t;
+            return false;
         }
 
 
