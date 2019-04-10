@@ -163,5 +163,23 @@ namespace NUnit.Tests1
             Assert.That(queue.Dequeue(), Is.EqualTo(1));
             Assert.That(queue.Dequeue(), Is.EqualTo(3));
         }
+
+        [Test, Timeout(500)]
+        public void TryDeque()
+        {
+            var queue = new BoundedQueue<int>(2);
+            queue.Enqueue(1);
+
+            int retVal;
+            var ok = queue.TryDequeue(100, out retVal);
+
+            Assert.That(ok, Is.True);
+            Assert.That(retVal, Is.EqualTo(1));
+
+            ok = queue.TryDequeue(100, out retVal);
+
+            Assert.That(ok, Is.False);
+
+        }
     }
 }
