@@ -32,7 +32,17 @@ namespace NUnit.Tests1
             
         }
 
-       
+        //needed to pass Point.Construct as parameter
+        private class TestStuff
+        {
+            public static IEnumerable Tests()
+            {
+                yield return new TestCaseData(90, Colors.Black, Point.Construct(5, 5), 0, Colors.White, Point.Construct(5, 6));
+                yield return new TestCaseData(90, Colors.White, Point.Construct(5, 5), 180, Colors.Black, Point.Construct(5, 4));
+          
+            }
+        }
+
         [TestCaseSource(typeof(TestStuff), nameof(TestStuff.Tests))]
         public void CheckAntCanMove(
             int degree, 
@@ -52,19 +62,5 @@ namespace NUnit.Tests1
             Assert.That(rcolor, Is.EqualTo(expectedColor));
 
         }
-
-
-        private class TestStuff
-        {
-            public static IEnumerable Tests()
-            {
-                yield return new TestCaseData(90, Colors.Black, Point.Construct(5, 5), 0, Colors.White, Point.Construct(5, 6));
-                yield return new TestCaseData(90, Colors.White, Point.Construct(5, 5), 180, Colors.Black, Point.Construct(5, 4));
-          
-            }
-        }
-
     }
-
- 
 }
