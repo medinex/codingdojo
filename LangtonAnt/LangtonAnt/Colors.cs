@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace LangtonAnt
 {
+    [Flags]
     public enum Colors
     {
         Black,
-        White
-        
+        White        
     }
 }

@@ -4,9 +4,11 @@ using System;
 
 namespace LangtonAnt
 {
-    public class LangtonPane
+    public class Map
     {
-        public LangtonPane(int v1, int v2)
+        private Ant _ant;
+
+        public Map(int v1, int v2)
         {
             this.Width = v1;
             this.Height = v2;
@@ -16,9 +18,9 @@ namespace LangtonAnt
 
         public int Width { get; set; }
 
-        public bool GetColor()
+        public Colors GetColor()
         {
-            throw new NotImplementedException();
+            return Colors.Black;
         }
     }
 }

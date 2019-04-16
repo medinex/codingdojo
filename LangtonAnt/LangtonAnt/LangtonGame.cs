@@ -4,15 +4,15 @@ using System;
 
 namespace LangtonAnt
 {
-    public class LangtonGame
+    public class Game
     {
-        public LangtonGame()
+        public Game()
         {
         }
 
-        public LangtonPane CreatePane(int width, int height)
+        public Map CreateMap(int width, int height)
         {
-            return new LangtonPane(width, height);
+            return new Map(width, height);
         }
     }
 }
