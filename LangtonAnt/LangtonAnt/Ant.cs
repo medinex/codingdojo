@@ -16,21 +16,45 @@ namespace LangtonAnt
 
         public Colors Move(Colors color)
         {
-            int i = 0;
+            int dy = 0;
+            int dx = 0;
             Colors retColor = Colors.Black;
             if(color == Colors.Black)
             {
-                i = 1;
                 Angle -= 90;
                 retColor = Colors.White;
             } 
             else {
-                i = -1;
                 Angle += 90;
                 retColor = Colors.Black;
             }
 
-            Coordinate = Point.Construct(Coordinate.X, Coordinate.Y + i);
+            if(Angle < 0)
+            {
+                Angle += 360;
+            }
+
+            switch (Angle%360)
+            {
+                case 0:
+                    dy = 1;
+                    dx = 0;
+                    break;
+                case 90:
+                    dy = 0;
+                    dx = 1;
+                    break;
+                case 180:
+                    dy = -1;
+                    dx = 0;
+                    break;
+                case 270:
+                    dy = 0;
+                    dx = -1;
+                    break;
+            }
+
+            Coordinate = Point.Construct(Coordinate.X + dx, Coordinate.Y + dy);
             
             return retColor;
         }

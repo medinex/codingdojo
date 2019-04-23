@@ -23,13 +23,47 @@ namespace NUnit.Tests1
         [Test]
         public void CheckCreatePlaneWillHaveColors()
         {
-            var langtonAnt = new Game();
-            var pane = langtonAnt.CreateMap(3, 3);
+            var game = new Game();
+            var pane = game.CreateMap(3, 3);
 
 
             
-            Assert.That(pane.GetColor(), Is.AnyOf(Colors.Black, Colors.White));
+            Assert.That(pane.GetColor(1,1), Is.AnyOf(Colors.Black, Colors.White));
             
+        }
+
+        [Test]
+        public void TickShouldMoveAnt()
+        {
+            var game = new Game();
+            var pane = game.CreateMap(3, 3);
+
+            var color = pane.GetCurrentColor(pane.Ant);
+            pane.Tick();
+
+            Assert.That(pane.GetCurrentColor(pane.Ant), Is.Not.EqualTo(color));
+
+        }
+
+        [Test]
+        public void DrawMap()
+        {
+            var game = new Game();
+            var pane = game.CreateMap(3, 3);
+
+            pane.Draw();
+
+            for (int i = 0; i < pane.Width; i++)
+            {
+                for (int j = 0; j < pane.Height; j++)
+                {
+                    var color = pane.GetColor(i, j);
+                    Assert.That(color, Is.AnyOf(Colors.Black, Colors.White));
+
+
+                }
+            }
+
         }
 
         //needed to pass Point.Construct as parameter
@@ -39,6 +73,8 @@ namespace NUnit.Tests1
             {
                 yield return new TestCaseData(90, Colors.Black, Point.Construct(5, 5), 0, Colors.White, Point.Construct(5, 6));
                 yield return new TestCaseData(90, Colors.White, Point.Construct(5, 5), 180, Colors.Black, Point.Construct(5, 4));
+                yield return new TestCaseData(180, Colors.White, Point.Construct(2, 2), 270, Colors.Black, Point.Construct(1, 2));
+                yield return new TestCaseData(0, Colors.Black, Point.Construct(0, 0), 270, Colors.White, Point.Construct(-1, 0));
           
             }
         }
@@ -57,9 +93,9 @@ namespace NUnit.Tests1
             ant.Angle = degree;
             var rcolor = ant.Move(color);
 
-            Assert.That(ant.Coordinate, Is.EqualTo(ptOut));
-            Assert.That(ant.Angle, Is.EqualTo(expectedDegree));
-            Assert.That(rcolor, Is.EqualTo(expectedColor));
+            Assert.That(ant.Coordinate, Is.EqualTo(ptOut), "Endpoint not as expected");
+            Assert.That(ant.Angle, Is.EqualTo(expectedDegree), "Angle not as expected");
+            Assert.That(rcolor, Is.EqualTo(expectedColor), "Color not as expected");
 
         }
     }

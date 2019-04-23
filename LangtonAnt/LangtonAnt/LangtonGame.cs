@@ -8,6 +8,7 @@ namespace LangtonAnt
     {
         public Game()
         {
+
         }
 
         public Map CreateMap(int width, int height)
