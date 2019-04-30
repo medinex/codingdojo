@@ -28,7 +28,7 @@ namespace NUnit.Tests1
 
 
             
-            Assert.That(pane.GetColor(1,1), Is.AnyOf(Colors.Black, Colors.White));
+            Assert.That(pane.GetCurrentColor(1,1), Is.AnyOf(Colors.Black, Colors.White));
             
         }
 
@@ -38,11 +38,24 @@ namespace NUnit.Tests1
             var game = new Game();
             var pane = game.CreateMap(3, 3);
 
-            var color = pane.GetCurrentColor(pane.Ant);
+            var color = pane.GetCurrentColor(1,2);
+            pane.Ant.Angle = 180;
             pane.Tick();
 
-            Assert.That(pane.GetCurrentColor(pane.Ant), Is.Not.EqualTo(color));
+            Assert.That(pane.Ant.Coordinate.X, Is.EqualTo(2));
+        }
 
+        [Test]
+        public void TickShouldChangeColor()
+        {
+            var game = new Game();
+            var pane = game.CreateMap(3, 3);
+
+            var oldCoordinate = pane.Ant.Coordinate;
+            var color = pane.GetCurrentColor(oldCoordinate);
+            pane.Tick();
+
+            Assert.That(pane.GetCurrentColor(oldCoordinate), Is.Not.EqualTo(color));
         }
 
         [Test]
@@ -57,7 +70,7 @@ namespace NUnit.Tests1
             {
                 for (int j = 0; j < pane.Height; j++)
                 {
-                    var color = pane.GetColor(i, j);
+                    var color = pane.GetCurrentColor(i, j);
                     Assert.That(color, Is.AnyOf(Colors.Black, Colors.White));
 
 

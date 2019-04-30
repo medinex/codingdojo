@@ -10,7 +10,6 @@ namespace LangtonAnt
     {
         static void Main(string[] args)
         {
-
         }
     }
 }

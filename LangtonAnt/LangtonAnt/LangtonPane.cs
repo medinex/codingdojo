@@ -22,7 +22,7 @@ namespace LangtonAnt
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    _matrix[i, j] = random.Next(1) == 0 ? Colors.Black : Colors.White;
+                    _matrix[i, j] = random.Next(2) == 0 ? Colors.Black : Colors.White;
                     
                 }
             }
@@ -33,14 +33,19 @@ namespace LangtonAnt
 
         public int Width { get; set; }
 
-        public Colors GetColor(int x, int y)
+        public Colors GetCurrentColor(Ant ant)
         {
-            return Colors.Black;
+            return _matrix[ant.Coordinate.X, ant.Coordinate.Y];
         }
 
-        public object GetCurrentColor(Ant ant)
+        public Colors GetCurrentColor(int i, int j)
         {
-            throw new NotImplementedException();
+            return _matrix[i, j];
+        }
+
+        public Colors GetCurrentColor(Point point)
+        {
+            return _matrix[point.X, point.Y];
         }
 
         public void Draw()
@@ -56,7 +61,10 @@ namespace LangtonAnt
 
         public void Tick()
         {
-            Ant.Move(GetColor(Ant.Coordinate.X, Ant.Coordinate.Y));
+            var oldCoordinate = Ant.Coordinate;
+
+            Colors color = Ant.Move(GetCurrentColor(oldCoordinate));
+            _matrix[oldCoordinate.X, oldCoordinate.Y] = color;
 
         }
     }

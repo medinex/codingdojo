@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LangtonAnt", "LangtonAnt\La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Tests1", "NUnit.Tests1\NUnit.Tests1.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCanvas", "GameCanvas\GameCanvas.csproj", "{FBADFE60-5B93-4EF2-80B2-C2165485975F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBADFE60-5B93-4EF2-80B2-C2165485975F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBADFE60-5B93-4EF2-80B2-C2165485975F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBADFE60-5B93-4EF2-80B2-C2165485975F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBADFE60-5B93-4EF2-80B2-C2165485975F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
