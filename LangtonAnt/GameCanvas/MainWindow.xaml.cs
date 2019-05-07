@@ -1,6 +1,7 @@
 ﻿using LangtonAnt;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,11 @@ namespace GameCanvas
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Canvas _antCanvas;
+        Game _game = new Game();
+        Map _pane = null;
+        Dictionary<LangtonAnt.Point, Canvas> _dict = new Dictionary<LangtonAnt.Point, Canvas>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,57 +35,98 @@ namespace GameCanvas
             canvas.Width = 400;
             canvas.Height = 400;
             Background = Brushes.Turquoise;
+            KeyDown += MainWindow_KeyDown;
 
-            var game = new Game();
-            var pane = game.CreateMap(20, 20);
+            _pane = _game.CreateMap(20, 20);
 
 
-            for (int x = 0; x < pane.Width; x++)
+            for (int x = 0; x < _pane.Width; x++)
             {
-                for (int y = 0; y < pane.Height; y++)
+                for (int y = 0; y < _pane.Height; y++)
                 {
                     var rectCanvas = new Canvas();
-                    rectCanvas.Background = pane.GetCurrentColor(x,y) == Colors.Black ? Brushes.Black : Brushes.White;
+                    rectCanvas.Background = _pane.GetColor(x, y) == Colors.Black ? Brushes.Black : Brushes.White;
                     rectCanvas.Height = 20;
                     rectCanvas.Width = 20;
                     Canvas.SetTop(rectCanvas, x * 20);
                     Canvas.SetLeft(rectCanvas, y * 20);
                     canvas.Children.Add(rectCanvas);
+                    var coordinate = LangtonAnt.Point.Construct(x, y);
+                    _dict.Add(coordinate, rectCanvas);
                 }
 
             }
 
-            var antCanvas = new Canvas();
-            antCanvas.Height = 20;
-            antCanvas.Width = 20;
-            Canvas.SetTop(antCanvas, pane.Ant.Coordinate.X * 20);
-            Canvas.SetLeft(antCanvas, pane.Ant.Coordinate.Y * 20);
+            _antCanvas = new Canvas();
+            _antCanvas.Height = 20;
+            _antCanvas.Width = 20;
 
             var head = new Ellipse();
             head.Stroke = Brushes.Red;
-            head.HorizontalAlignment = HorizontalAlignment.Center;
-            head.VerticalAlignment = VerticalAlignment.Top;
             head.Width = 5;
             head.Height = 5;
             head.StrokeThickness = 2;
-            antCanvas.Children.Add(head);
+            _antCanvas.Children.Add(head);
+            Canvas.SetLeft(head, 10 - 5 / 2);
+            Canvas.SetTop(head, 0);
 
             var body = new Ellipse();
             body.Stroke = Brushes.Red;
-            body.HorizontalAlignment = HorizontalAlignment.Center;
-            body.VerticalAlignment = VerticalAlignment.Bottom;
             body.Width = 10;
             body.Height = 15;
             body.StrokeThickness = 2;
-            antCanvas.Children.Add(body);
+            _antCanvas.Children.Add(body);
+            Canvas.SetLeft(body, 10 - 10 / 2);
+            Canvas.SetTop(body, 4);
 
-            canvas.Children.Add(antCanvas);
+            canvas.Children.Add(_antCanvas);
 
 
             Content = canvas;
 
+            MoveAnt();
 
-      
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Space)
+            {
+                var beforeTick = _pane.Ant.Coordinate;
+
+                _pane.Tick();
+
+                //Canvas canvas = Content as Canvas;
+                //foreach (var item in canvas.Children)
+                //{
+                //    if (item is Canvas c)
+                //    {
+                //        int x = (int)Canvas.GetLeft(c) / 20;
+                //        int y = (int)Canvas.GetTop(c) / 20;
+
+                //        if(beforeTick.X == x && beforeTick.Y == y)
+                //        {
+                //            c.Background = _pane.GetCurrentColor(beforeTick) == Colors.Black ? Brushes.Black : Brushes.White; 
+                //        } 
+                //    }
+                //}
+
+                var canvas = _dict.Where(s => s.Key.Equals(beforeTick)).FirstOrDefault().Value;
+
+                if(canvas != null)
+                {
+                    canvas.Background = _pane.GetCurrentColor(beforeTick) == Colors.Black ? Brushes.Black : Brushes.White;
+                }
+                
+                MoveAnt();
+            }
+           
+        }
+
+        private void MoveAnt()
+        {
+            Canvas.SetTop(_antCanvas, _pane.Ant.Coordinate.X * 20);
+            Canvas.SetLeft(_antCanvas, _pane.Ant.Coordinate.Y * 20);
         }
     }
 }

@@ -33,14 +33,19 @@ namespace LangtonAnt
 
         public int Width { get; set; }
 
-        public Colors GetCurrentColor(Ant ant)
+        public Colors GetColor(Ant ant)
         {
             return _matrix[ant.Coordinate.X, ant.Coordinate.Y];
         }
 
-        public Colors GetCurrentColor(int i, int j)
+        public Colors GetColor(int x, int y)
         {
-            return _matrix[i, j];
+            return _matrix[x, y];
+        }
+
+        public void SetColor(int x, int y, Colors newColor)
+        {
+            _matrix[x, y] = newColor;
         }
 
         public Colors GetCurrentColor(Point point)
@@ -48,17 +53,7 @@ namespace LangtonAnt
             return _matrix[point.X, point.Y];
         }
 
-        public void Draw()
-        {
-            for (int i = 0; i < Width; i++)
-            {
-                for (int j = 0; j < Height; j++)
-                {
-
-                }
-            }
-        }
-
+        
         public void Tick()
         {
             var oldCoordinate = Ant.Coordinate;

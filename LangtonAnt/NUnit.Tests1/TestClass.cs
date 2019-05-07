@@ -28,7 +28,7 @@ namespace NUnit.Tests1
 
 
             
-            Assert.That(pane.GetCurrentColor(1,1), Is.AnyOf(Colors.Black, Colors.White));
+            Assert.That(pane.GetColor(1,1), Is.AnyOf(Colors.Black, Colors.White));
             
         }
 
@@ -38,7 +38,7 @@ namespace NUnit.Tests1
             var game = new Game();
             var pane = game.CreateMap(3, 3);
 
-            var color = pane.GetCurrentColor(1,2);
+            var color = pane.GetColor(1,2);
             pane.Ant.Angle = 180;
             pane.Tick();
 
@@ -64,19 +64,35 @@ namespace NUnit.Tests1
             var game = new Game();
             var pane = game.CreateMap(3, 3);
 
-            pane.Draw();
-
+            
             for (int i = 0; i < pane.Width; i++)
             {
                 for (int j = 0; j < pane.Height; j++)
                 {
-                    var color = pane.GetCurrentColor(i, j);
+                    var color = pane.GetColor(i, j);
                     Assert.That(color, Is.AnyOf(Colors.Black, Colors.White));
 
 
                 }
             }
 
+        }
+
+        [Test]
+        public void CheckOutOfBounds()
+        {
+            var game = new Game();
+            var pane = game.CreateMap(5,5);
+
+
+            pane.Ant.Coordinate = Point.Construct(0, 0);
+            pane.Ant.Angle = 180;
+            pane.SetColor(0, 0, Colors.White);
+
+            pane.Tick();
+
+            Assert.That(pane.Ant.Coordinate.X, Is.EqualTo(4));
+            Assert.That(pane.Ant.Coordinate.Y, Is.EqualTo(0));
         }
 
         //needed to pass Point.Construct as parameter

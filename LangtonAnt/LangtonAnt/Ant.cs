@@ -53,8 +53,15 @@ namespace LangtonAnt
                     dx = -1;
                     break;
             }
+            var newX = Coordinate.X + dx;
+            var newY = Coordinate.Y + dy;
 
-            Coordinate = Point.Construct(Coordinate.X + dx, Coordinate.Y + dy);
+            if(newX < 0)
+            {
+                newX = 5;
+            }
+
+            Coordinate = Point.Construct(newX, newY);
             
             return retColor;
         }
