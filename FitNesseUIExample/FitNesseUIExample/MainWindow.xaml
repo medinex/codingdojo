@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitNesseUIExample"
         mc:Ignorable="d"
-        Title="FitNesseUIExample" Height="450" Width="800">
+        Title="FitNesseUIExample" Height="237" Width="529">
     <Grid>
-        <StackPanel Margin="100 100">
+        <StackPanel>
             <DockPanel Margin="10">
-                <TextBlock Text="Number to calculate with:" Width="200" Height="30" HorizontalAlignment="Left" />
+                <TextBlock Text="Number to calculate with:" Width="145" Height="30" HorizontalAlignment="Left" />
                 <TextBox x:Name="InputNumber"
                          MinWidth="300" Width="300" Height="30" />
             </DockPanel>
             <DockPanel Margin="10">
-                <TextBlock Text="Result:" Width="200" Height="30" HorizontalAlignment="Left" />
+                <TextBlock Text="Result:" Width="145" Height="30" HorizontalAlignment="Left" />
                 <TextBox x:Name="OutputResult"
                          MinWidth="300" Width="300" Height="30"  />
             </DockPanel>
