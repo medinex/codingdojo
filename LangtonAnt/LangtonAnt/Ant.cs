@@ -14,11 +14,13 @@ namespace LangtonAnt
         public Colors CurrentColor { get; set; }
         public Point Coordinate { get; set; }
 
-        public Colors Move(Colors color)
+        public Colors Move(Map map)
         {
             int dy = 0;
             int dx = 0;
             Colors retColor = Colors.Black;
+            var color = map.GetCurrentColor(Coordinate);
+
             if(color == Colors.Black)
             {
                 Angle -= 90;
@@ -37,7 +39,7 @@ namespace LangtonAnt
             switch (Angle%360)
             {
                 case 0:
-                    dy = 1;
+                    dy = -1;
                     dx = 0;
                     break;
                 case 90:
@@ -45,7 +47,7 @@ namespace LangtonAnt
                     dx = 1;
                     break;
                 case 180:
-                    dy = -1;
+                    dy = 1;
                     dx = 0;
                     break;
                 case 270:
@@ -58,8 +60,18 @@ namespace LangtonAnt
 
             if(newX < 0)
             {
-                newX = 5;
-            }
+                newX = map.Width - 1;
+            }//if
+
+            if (newY < 0)
+            {
+                newY = map.Height - 1;
+            }//if
+
+            if (newX >= map.Width)
+                newX = 0;
+            if (newY >= map.Height)
+                newY = 0;
 
             Coordinate = Point.Construct(newX, newY);
             

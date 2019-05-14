@@ -58,9 +58,13 @@ namespace LangtonAnt
         {
             var oldCoordinate = Ant.Coordinate;
 
-            Colors color = Ant.Move(GetCurrentColor(oldCoordinate));
+            Colors color = Ant.Move(this);
             _matrix[oldCoordinate.X, oldCoordinate.Y] = color;
 
+        }
+        public void SetColor(Point coordinate, Colors color)
+        {
+            SetColor(coordinate.X, coordinate.Y, color);
         }
     }
 }

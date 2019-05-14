@@ -38,11 +38,13 @@ namespace NUnit.Tests1
             var game = new Game();
             var pane = game.CreateMap(3, 3);
 
-            var color = pane.GetColor(1,2);
+            pane.SetColor(pane.Ant.Coordinate, Colors.Black);
             pane.Ant.Angle = 180;
             pane.Tick();
 
+            Assert.That(pane.Ant.Angle, Is.EqualTo(90));
             Assert.That(pane.Ant.Coordinate.X, Is.EqualTo(2));
+            Assert.That(pane.Ant.Coordinate.Y, Is.EqualTo(1));
         }
 
         [Test]
@@ -86,13 +88,13 @@ namespace NUnit.Tests1
 
 
             pane.Ant.Coordinate = Point.Construct(0, 0);
-            pane.Ant.Angle = 180;
+            pane.Ant.Angle = 270;
             pane.SetColor(0, 0, Colors.White);
 
             pane.Tick();
 
-            Assert.That(pane.Ant.Coordinate.X, Is.EqualTo(4));
-            Assert.That(pane.Ant.Coordinate.Y, Is.EqualTo(0));
+            Assert.That(pane.Ant.Coordinate.X, Is.EqualTo(0));
+            Assert.That(pane.Ant.Coordinate.Y, Is.EqualTo(4));
         }
 
         //needed to pass Point.Construct as parameter
@@ -100,10 +102,10 @@ namespace NUnit.Tests1
         {
             public static IEnumerable Tests()
             {
-                yield return new TestCaseData(90, Colors.Black, Point.Construct(5, 5), 0, Colors.White, Point.Construct(5, 6));
-                yield return new TestCaseData(90, Colors.White, Point.Construct(5, 5), 180, Colors.Black, Point.Construct(5, 4));
+                yield return new TestCaseData(90, Colors.Black, Point.Construct(5, 5), 0, Colors.White, Point.Construct(5, 4));
+                yield return new TestCaseData(90, Colors.White, Point.Construct(5, 5), 180, Colors.Black, Point.Construct(5, 6));
                 yield return new TestCaseData(180, Colors.White, Point.Construct(2, 2), 270, Colors.Black, Point.Construct(1, 2));
-                yield return new TestCaseData(0, Colors.Black, Point.Construct(0, 0), 270, Colors.White, Point.Construct(-1, 0));
+                yield return new TestCaseData(0, Colors.Black, Point.Construct(0, 0), 270, Colors.White, Point.Construct(9, 0));
           
             }
         }
@@ -117,10 +119,11 @@ namespace NUnit.Tests1
             Colors expectedColor,
             Point ptOut)
         {
+            var map = new Map(10,10); 
             var ant = new Ant();
             ant.Coordinate = ptIn;
             ant.Angle = degree;
-            var rcolor = ant.Move(color);
+            var rcolor = ant.Move(map);
 
             Assert.That(ant.Coordinate, Is.EqualTo(ptOut), "Endpoint not as expected");
             Assert.That(ant.Angle, Is.EqualTo(expectedDegree), "Angle not as expected");

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,6 +126,19 @@ namespace GameCanvas
 
         private void MoveAnt()
         {
+
+            var currentTransform = _antCanvas.RenderTransform as RotateTransform;
+            if (currentTransform != null)
+            {
+                var rotate = new RotateTransform(-currentTransform.Angle, 10, 10);
+                _antCanvas.RenderTransform = rotate;
+            }
+
+            //Debug.WriteLine(_pane.Ant.Angle);
+            var rotateTransform = new RotateTransform(_pane.Ant.Angle, 10, 10);
+            _antCanvas.RenderTransform = rotateTransform;
+
+
             Canvas.SetTop(_antCanvas, _pane.Ant.Coordinate.X * 20);
             Canvas.SetLeft(_antCanvas, _pane.Ant.Coordinate.Y * 20);
         }
