@@ -113,7 +113,7 @@ namespace NUnit.Tests1
         [TestCaseSource(typeof(TestStuff), nameof(TestStuff.Tests))]
         public void CheckAntCanMove(
             int degree, 
-            Colors color, 
+            Colors inputColor, 
             Point ptIn, 
             int expectedDegree, 
             Colors expectedColor,
@@ -123,6 +123,7 @@ namespace NUnit.Tests1
             var ant = new Ant();
             ant.Coordinate = ptIn;
             ant.Angle = degree;
+            map.SetColor(ant.Coordinate, inputColor);
             var rcolor = ant.Move(map);
 
             Assert.That(ant.Coordinate, Is.EqualTo(ptOut), "Endpoint not as expected");
