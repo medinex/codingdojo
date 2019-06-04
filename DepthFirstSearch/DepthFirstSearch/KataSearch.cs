@@ -8,21 +8,21 @@ namespace DepthFirstSearch
 {
     public class KataSearch
     {
-   
-
-        public KataSearch(object v)
+        public static object WhereAreWe(Node node)
         {
-          
+            return node.Name;
         }
 
-        public int WhereAmI()
+        public static List<Node> WhereAreTheExists(Node node)
         {
-            return 1;
+            return node.Children();
         }
 
-        public object WhereCanIGo()
+        
+        public static string[] Traverse(Node node)
         {
             return null;
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using DepthFirstSearch;
 using System.Collections;
+using System.Linq;
 
 namespace DepthFirstSearchTest
 {
@@ -9,31 +10,29 @@ namespace DepthFirstSearchTest
     public class UnitTest1
     {
         [Test]
-        public void AskingWhereWeAreShouldReturnPosition()
+        public void WhereAreWeFirstNode()
         {
-            var problem = new Problem();
-            var whatever = new KataSearch(problem);
-            var position = whatever.WhereAmI();
-
-            Assert.That(position, Is.EqualTo(1));
+            var node = new Node("A");
+            var result = KataSearch.WhereAreWe(node);
+            Assert.That(result, Is.EqualTo("A"));
         }
 
-        [TestCaseSource(typeof(TestSource), nameof(TestSource.Tests))]
-
-        public void AskingWhereCanIGoShouldReturnNull(Problem problem, object foundObject)
+        [Test]
+        public void WhereAreTheExitsFirstNode()
         {
-            var whatever = new KataSearch(problem);
-            var nextPath = whatever.WhereCanIGo();
-
-            Assert.That(nextPath, Is.EqualTo(foundObject));
+            var node = new Node("A");
+            node.AddChildren("B", "C");
+            var result = KataSearch.WhereAreTheExists(node);
+            Assert.That(result.Count, Is.EqualTo(2));
         }
 
-        private class TestSource
+        [Test]
+        public void TraverseNodeShouldReturnPath()
         {
-            public static IEnumerable Tests()
-            {
-                yield return new TestCaseData(new Problem(), null);
-            }
+            var node = new Node("A");
+            node.AddChildren("B", "C");
+            var result = KataSearch.Traverse(node);
+            Assert.That(result.ToArray(), Is.EqualTo(new string[] { "A", "B", "A", "C" }));
         }
 
     }
