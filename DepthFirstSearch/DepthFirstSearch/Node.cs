@@ -21,12 +21,20 @@ namespace DepthFirstSearch
         }
 
 
-        public void AddChildren(params string[] v)
+        public IList<Node> AddChildren(params string[] v)
         {
             for (int i = 0; i < v.Length; i++)
             {
-                _children.Add(new Node(v[i]));
+                var node = new Node(v[i]);
+                node.AddChild(this);
+                AddChild(node);
             }
+            return this.Children().ToArray();
+        }
+
+        private void AddChild(Node node)
+        {
+            _children.Add(node);
         }
 
         internal List<Node> Children()
