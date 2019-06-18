@@ -42,26 +42,5 @@ namespace DepthFirstSearch
         }
 
 
-        
-
-        public static List<string> Traverse2(Node node, List<Node> visited)
-        {
-            visited.Add(node);
-
-            var ret = new List<string>();
-            foreach(var n in node.Children())
-            {
-                var t = Traverse2(n, visited);
-                foreach (var s in t)
-                {
-                    bool exist = visited.Find(x => x.Name == s) != null;
-
-                    if ( !exist )
-                        ret.Add(s);
-                }
-            }
-            return ret;
-        }
-
     }
 }

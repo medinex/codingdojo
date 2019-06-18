@@ -26,7 +26,6 @@ namespace DepthFirstSearch
             for (int i = 0; i < v.Length; i++)
             {
                 var node = new Node(v[i]);
-                node.AddChild(this);
                 AddChild(node);
             }
             return this.Children().ToArray();
@@ -37,7 +36,7 @@ namespace DepthFirstSearch
             _children.Add(node);
         }
 
-        internal List<Node> Children()
+        public List<Node> Children()
         {
             return _children;
         }

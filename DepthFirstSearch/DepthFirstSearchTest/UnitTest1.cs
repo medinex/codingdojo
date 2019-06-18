@@ -33,7 +33,7 @@ namespace DepthFirstSearchTest
             var node = new Node("A");
             node.AddChildren("B", "C");
             var result = KataSearch.Traverse(node);
-            Assert.That(result.ToArray(), Is.EqualTo(new string[] { "A", "B", "A", "C" }));
+            Assert.That(result.ToArray(), Is.EqualTo(new string[] { "A", "B", "A", "C", "A" }));
         }
 
 
@@ -50,7 +50,23 @@ namespace DepthFirstSearchTest
 
             var empty = new List<Node>();
             var result = KataSearch.Traverse(node);
-            Assert.That(result.ToArray(), Is.EqualTo(new string[] { "1", "2", "3", "4" , "3", "5", "3", "2", "6", "2", "1", "7", "1", "8", "9", "10", "9", "11", "9", "8", "12"}));
+            Assert.That(result.ToArray(), Is.EqualTo(new string[] { "1", "2", "3", "4" , "3", "5", "3", "2", "6", "2", "1", "7", "1", "8", "9", "10", "9", "11", "9", "8", "12", "8", "1"}));
+        }
+
+        [Test]
+        public void TestMaze()
+        {
+            var node = new Node("1");
+            var children = node.AddChildren("2");
+            var child1 = children[0].AddChildren("3");
+            var child2 = child1[0].AddChildren("4", "6");
+            var child3 = child2[0].AddChildren("5");
+            var child4 = child2[1].AddChildren("7");
+            var child5 = child4[0].AddChildren("8");
+
+            var empty = new List<Node>();
+            var result = KataSearch.Traverse(node);
+            Assert.That(result.ToArray(), Is.EqualTo(new string[] { "1", "2", "3", "4", "5", "4", "3", "6","7","8","7","6","3","2","1"}));
         }
 
     }
