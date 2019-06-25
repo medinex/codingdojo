@@ -16,12 +16,23 @@ namespace UnitTestProject1
             // a b c d e f g h i j k l m n o p q r s t u v w x y z
             // ! ) " ( £ * % & > < @ a b c d e f g h i j k l m n o
 
-            var encryptedMEssage = Enigma.Decrypt(encrypt);
+            var secret = Enigma.Decrypt(encrypt);
 
-            Assert.AreEqual(  message , encryptedMEssage);
+            Assert.AreEqual(message, secret);
+        }
 
+        [DataTestMethod]
+        [DataRow("hello world", "&£aad ldga(")]
+        [DataRow("super lopes", "hje£g ade£h")]
+        [DataRow("nexus ag", "c£mjh !%")]
+        public void TestEncryption(string message, string encrypt)
+        {
+            // a b c d e f g h i j k l m n o p q r s t u v w x y z
+            // ! ) " ( £ * % & > < @ a b c d e f g h i j k l m n o
 
+            var encrypted = Enigma.Encrypt(message);
 
+            Assert.AreEqual(encrypt, encrypted);
         }
     }
 }
