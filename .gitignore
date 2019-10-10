@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/BasicCalculatorExample/UnitTestProject1/UnitTestProject1.csproj
+/BasicCalculatorExample/UnitTestProject1/UnitTest1.cs
+/BasicCalculatorExample/UnitTestProject1/Properties/AssemblyInfo.cs
+/BasicCalculatorExample/UnitTestProject1/packages.config
