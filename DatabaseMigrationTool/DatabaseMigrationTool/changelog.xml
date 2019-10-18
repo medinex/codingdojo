@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" runAlways="false" runOnChange="false" context="" failOnError="true">
+        <comment>Lorem ipsum dolor sit amet...</comment>
+
+        <!--onFail/onError: HALT|CONTINUE|MARK_RAN|WARN-->
+        <!--onSqlOutput: TEST|FAIL|IGNORE-->
+        <preConditions onFail="HALT" onFailMessage="" onError="HALT" onErrorMessage="" onSqlOutput="TEST">
+            <runningAs username="SYSTEM" />
+            <changeSetExecuted id="" changeLogFile="" />
+            <sqlCheck expectedResult="1">SELECT 1 FROM dual</sqlCheck>
+        </preConditions>
+
+        <!--
+         For PL/SQL this splitStatements="true" must set to FALSE!
+        -->
+        <sqlFile 
+            encoding="utf8"
+            endDelimiter=";"
+            path="my/path/file.sql"
+            relativeToChangelogFile="true"
+            splitStatements="true"
+            stripComments="false" />
+
+        <sql endDelimiter=";"
+             splitStatements="true"
+             stripComments="false">
+
+            insert into person (name) values ('Bob')
+        </sql>
+    
+        <rollback>
+            <sql>rollback; -- whatever</sql>
+        </rollback>
+    </changeSet>
+    
+    <include file="com/example/news/news.changelog.xml" relativeToChangelogFile="false" context="" />
+
+</databaseChangeLog>
