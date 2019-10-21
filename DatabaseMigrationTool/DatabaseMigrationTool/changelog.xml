@@ -32,8 +32,9 @@
              splitStatements="true"
              stripComments="false">
 
-            insert into person (name) values ('Bob')
-        </sql>
+insert into person (name) values ('Bob');
+
+</sql>
     
         <rollback>
             <sql>rollback; -- whatever</sql>
