@@ -8,5 +8,57 @@
         Title="Countdown" Height="450" Width="800">
     <Grid>
         
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Viewbox Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <TextBox  Text="{Binding CountDownTime}"
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Foreground" Value="Red"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsTimeNegative}" Value="True"/>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+        </Viewbox>
+        
+        <ProgressBar Grid.Row="2" 
+                     Grid.Column="0" 
+                     Grid.ColumnSpan="3" 
+                     Margin="10"
+                     Value="{Binding Value}"
+                     Minimum="0"
+                     Maximum="100"/>
+        
+        <StackPanel Grid.Row="0" 
+                    Grid.Column="2" 
+                    Grid.RowSpan="2" 
+                    VerticalAlignment="Center">
+            
+            <Button Command="{Binding StartCommand}"
+                    Content="Start" 
+                    Margin="20" />
+            <Button Command="{Binding StopCommand}"
+                    Content="Stop" 
+                    Margin="20" />
+            <Button Command="{Binding ResetCommand}"
+                    Content="Reset" 
+                    Margin="20"/>
+            
+        </StackPanel>
+        
+
     </Grid>
 </Window>
