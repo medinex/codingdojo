@@ -25,16 +25,16 @@ namespace Countdown.ViewModel
         public TimeSpan CountDownTime
         {
             get => _countDownTime;
-            set => Set(ref _countDownTime, value);
+            set 
+            {
+                Set(ref _countDownTime, value);
+
+                RaisePropertyChanged(nameof(IsTimeNegative));
+            } 
         }
         private TimeSpan _countDownTime = new TimeSpan(0, 0, 0);
 
-        public bool IsTimeNegative
-        {
-            get =>  _IsTimeNegative;
-            set => Set(ref _IsTimeNegative, value);
-        }
-        private bool _IsTimeNegative;
+        public bool IsTimeNegative => CountDownTime < _timeSpanZero;
 
         public ICommand ResetCommand { get; }
         public ICommand StartCommand { get; }
@@ -67,13 +67,8 @@ namespace Countdown.ViewModel
 
         private void _timer_Tick(object sender, EventArgs e)
         {
-            Value = 100 - (CountDownTime.TotalSeconds / BaseCountDownTime.TotalSeconds) * 100;
             CountDownTime = CountDownTime.Subtract(new TimeSpan(0, 0, 1));
-            
-            if(CountDownTime < _timeSpanZero)
-            {
-                IsTimeNegative = true;
-            }
+            Value = 100 - (CountDownTime.TotalSeconds / BaseCountDownTime.TotalSeconds) * 100;
         }
     }
 }

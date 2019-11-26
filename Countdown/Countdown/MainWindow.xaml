@@ -20,14 +20,23 @@
         </Grid.ColumnDefinitions>
         
         <Viewbox Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <TextBox  Text="{Binding CountDownTime}"
+            <TextBox  Text="{Binding CountDownTime }"
                       VerticalAlignment="Stretch" 
                       HorizontalAlignment="Stretch">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
-                        <Setter Property="Foreground" Value="Red"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsTimeNegative}" Value="True"/>
+                            <DataTrigger Binding="{Binding IsTimeNegative}" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsTimeNegative}" Value="False">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </DataTrigger>
+                            <Trigger Property="Validation.HasError"
+                                     Value="True">
+                                <Setter Property="ToolTip"
+                                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                            </Trigger>
                         </Style.Triggers>
                     </Style>
                 </TextBox.Style>
@@ -56,7 +65,8 @@
             <Button Command="{Binding ResetCommand}"
                     Content="Reset" 
                     Margin="20"/>
-            
+          
+
         </StackPanel>
         
 
