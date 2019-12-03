@@ -8,17 +8,17 @@ namespace Countdown.ViewModel
 {
     public class CountDownViewModel : ViewModelBase
     {
-        private DispatcherTimer _timer = new DispatcherTimer();
         private TimeSpan BaseCountDownTime { get; set; } = new TimeSpan(0, 0, 0);
         private readonly TimeSpan _timeSpanZero = new TimeSpan(0, 0, 0);
+        ITimer _timer;
 
-        public CountDownViewModel()
+        public CountDownViewModel(ITimer timer)
         {
+
             StartCommand = new RelayCommand(OnStartCommand);
             StopCommand = new RelayCommand(OnStopCommand);
             ResetCommand = new RelayCommand(OnResetCommand);
-
-            _timer.Interval = new TimeSpan(0, 0, 1);
+            _timer = timer; // ?? new ArgumentNullException(nameof(_timer));
             _timer.Tick += _timer_Tick;
         }
 
@@ -70,5 +70,6 @@ namespace Countdown.ViewModel
             CountDownTime = CountDownTime.Subtract(new TimeSpan(0, 0, 1));
             Value = 100 - (CountDownTime.TotalSeconds / BaseCountDownTime.TotalSeconds) * 100;
         }
+
     }
 }

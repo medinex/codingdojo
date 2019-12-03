@@ -24,7 +24,7 @@ namespace Countdown
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new CountDownViewModel();
+            DataContext = new CountDownViewModel(new Timer());
         }
     }
 }
