@@ -70,5 +70,49 @@ namespace BofhExuseGenerator
                 "Non-Serious"
                     };
         }
+
+        public static List<string> GetSecondList()
+        {
+
+            return new List<string> {
+                "Second" };
+        }
+
+
+        public static List<string> GetThirdList()
+        {
+
+            return new List<string> {
+                "Third" };
+        }
+
+        public static List<string> GetFourthList()
+        {
+
+            return new List<string> {
+                "Fourth" };
+        }
+
+        public static List<string> GetList(int n)
+        {
+            List<string> retList = new List<string>();
+            switch (n)
+            {
+                case 0:
+                    retList = GetFirstList();
+                    break;
+                case 1:
+                    retList = GetSecondList();
+                    break;
+                case 2:
+                    retList = GetThirdList();
+                    break;
+                case 3:
+                    retList = GetFourthList();
+                    break;
+            }
+                
+            return retList;
+        }
     }
 }
