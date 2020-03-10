@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,38 +10,31 @@ namespace ExcuseGenerator
 {
     public class ExcuseGeneratorModel
     {
-        private readonly IEnumerable<string> _exucsesFile1;
-        private readonly IEnumerable<string> _exucsesFile3;
-        private readonly IEnumerable<string> _exucsesFile2;
 
-        //private Random 
-        private const char _separator = ',';
+        private readonly IDataService _dataService;
+        private readonly IRandomNumberProvider _random;
+        
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="file1"></param>
-        /// <param name="file2"></param>
-        /// <param name="file3"></param>
-        /// <exception cref="FileNotFoundException">when at least one of given files does not exist</exception>
-        public ExcuseGeneratorModel(string file1, string file2, string file3)
+        public ExcuseGeneratorModel(IDataService dataService, IRandomNumberProvider randomNumberProvider)
         {
-            //if (!FilesExist(file1, file2, file3))
-            //    throw new FileNotFoundException();
-            _exucsesFile1 = File.ReadAllText(file1).Split(_separator).ToList();
-            _exucsesFile2 = File.ReadAllText(file2).Split(_separator).ToList();
-            _exucsesFile3 = File.ReadAllText(file3).Split(_separator).ToList();
-
+            _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
+            _random = randomNumberProvider ?? throw new ArgumentNullException(nameof(randomNumberProvider));
         }
 
-        private static bool FilesExist(string file1, string file2, string file3)
+        public string GenerateExcuse()
         {
-            return File.Exists(file1) && File.Exists(file2) && File.Exists(file3);
-        }
+            string concat = string.Empty;
 
-        public IEnumerable<string> GenerateExcuse()
-        {
-            return new List<string>();
+            foreach(var data in _dataService.Data)
+            {
+                var count = data.ToList().Count;
+
+                var randomString = data.ToList()[_random.GenerateRandom(0, count - 1)];
+
+                concat = string.Format(CultureInfo.CurrentCulture, "{0} {1}", concat, randomString);
+            }
+
+            return concat;
         }
     }
 }
