@@ -24,6 +24,8 @@ namespace ProcessMonitor
             pm.stop();
             */
 
+            // Hello World
+
             // lists performance counter categories
             // TODO please put this in a method inside either the PerformanceMonitor or new Library
             // TODO optionally extend this to not only localhost (".")
