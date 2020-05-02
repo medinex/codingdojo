@@ -16,8 +16,7 @@ namespace ProcessMonitor
         public PerformanceMonitor()
         {
             _start = new ManagementEventWatcher(new WqlEventQuery("SELECT * FROM Win32_ProcessStartTrace"));
-            _stop = new ManagementEventWatcher(new WqlEventQuery("SELECT * FROM Win32_ProcessStartTrace"));
-
+            _stop = new ManagementEventWatcher(new WqlEventQuery("SELECT * FROM Win32_ProcessStopTrace"));
         }
 
         public void start()
