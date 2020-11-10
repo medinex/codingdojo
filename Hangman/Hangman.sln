@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman", "Hangman\Hangman.csproj", "{2A99AA0E-6EE0-40E4-95F2-9788F24C6EFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangmanTest", "HangmanTest\HangmanTest.csproj", "{15E4ECF2-F1DE-4E39-9882-D71F05B35681}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A99AA0E-6EE0-40E4-95F2-9788F24C6EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A99AA0E-6EE0-40E4-95F2-9788F24C6EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A99AA0E-6EE0-40E4-95F2-9788F24C6EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A99AA0E-6EE0-40E4-95F2-9788F24C6EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E4ECF2-F1DE-4E39-9882-D71F05B35681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E4ECF2-F1DE-4E39-9882-D71F05B35681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E4ECF2-F1DE-4E39-9882-D71F05B35681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E4ECF2-F1DE-4E39-9882-D71F05B35681}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49BE7861-C86D-4B0D-9F55-E6E88AA2F108}
+	EndGlobalSection
+EndGlobal
