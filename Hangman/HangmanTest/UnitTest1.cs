@@ -23,6 +23,10 @@ namespace HangmanTest
 
             Assert.AreEqual("t--t", ret);
 
+            ret = h.Guess('t');
+
+            Assert.AreEqual("t--t", ret);
+
             ret = h.Guess('e');
 
             Assert.AreEqual("te-t", ret);
