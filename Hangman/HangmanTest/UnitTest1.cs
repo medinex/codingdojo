@@ -13,7 +13,7 @@ namespace HangmanTest
         [Test]
         public void Test1()
         {
-            var h = new Hangman("test");
+            var h = new Hangman("Test");
 
             var ret = h.Guess('a');
 
@@ -27,7 +27,7 @@ namespace HangmanTest
 
             Assert.AreEqual("t--t", ret);
 
-            ret = h.Guess('e');
+            ret = h.Guess('E');
 
             Assert.AreEqual("te-t", ret);
 

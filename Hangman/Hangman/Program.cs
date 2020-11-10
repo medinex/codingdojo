@@ -9,18 +9,19 @@ namespace HangmanGame
         private StringBuilder _secredGuessed;
         public Hangman(string secret)
         {
-            _secret = secret;
+            _secret = secret.ToLower();
             var secredGuessed = new string('-', secret.Length);
             _secredGuessed = new StringBuilder(secredGuessed);
 
         }
         public string Guess(char letter)
         {
+            var lowerLetter = Char.ToLower(letter);
             for (int i = 0; i < _secret.Length; i++)
             {
-                if (_secret[i] == letter)
+                if (_secret[i] == lowerLetter)
                 {
-                    _secredGuessed[i] = letter;
+                    _secredGuessed[i] = lowerLetter;
                 }
             }
 
