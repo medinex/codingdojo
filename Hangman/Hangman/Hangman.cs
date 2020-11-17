@@ -1,19 +1,28 @@
 ﻿using System;
+using System.Text;
 
 namespace Hangman
 {
     public class Hangman
     {
         string _secret;
+        string _solvedSecret;
+        int _attempts = 10;
 
         public Hangman(string secret) {
             _secret = secret;
+            _solvedSecret = new String('-',secret.Length);
         }
         
         public string Guess(char letter) {
 
+            if(_attempts <= 0)
+            {
+                return _solvedSecret;
+            }
+
             int len = _secret.Length;
-            string solvedSecret = "";
+            StringBuilder str = new StringBuilder(_solvedSecret);
             string caseInSensitiveSecret = _secret.ToUpper();
             string caseInSensitiveLetter = letter.ToString().ToUpper();
 
@@ -21,20 +30,19 @@ namespace Hangman
             {
                 if (caseInSensitiveSecret[c].ToString() == caseInSensitiveLetter)
                 {
-                    solvedSecret += _secret[c].ToString();
-                }
-                else
-                {
-                    solvedSecret += "-";
+                    str[c] = _secret[c];
                 }
             }
 
-            return solvedSecret;
+            _solvedSecret = str.ToString();
+            _attempts--;
+
+            return _solvedSecret;
         }
 
         public int GetRemainingAttempts()
         {
-            return 9;
+            return _attempts;
         }
     }
 

@@ -5,7 +5,6 @@ namespace Hangman
 {
     public class HangmanTest
     {
-
         [TestCase("secret","x","------")]
         [TestCase("apple", "x", "-----")]
         public void GuessWrongLetterShouldReturnDashedString(string secret, char guessedLetter, string solvedSecret)
@@ -33,34 +32,40 @@ namespace Hangman
             Assert.AreEqual(solvedSecret, h.Guess(guessedLetter));
         }
 
-        [TestCase("secret", "e", "-e--e-", 9)]
-        [TestCase("secret", "s", "se--e-", 8)]
-        [TestCase("secret", "r", "se-re-", 7)]
-        [TestCase("secret", "c", "secre-", 6)]
-        [TestCase("secret", "t", "secret", 5)]
-        public void OneGuessShouldReduceRemainingAttemptsByOne(string secret, char guessedLetter, string solvedSecret, int remainingAttempts)
+        [Test]
+        public void MultipleGuessesShouldSolveTheSecret()
         {
-            Hangman h = new Hangman(secret);
-            Assert.AreEqual(solvedSecret, h.Guess(guessedLetter));
-            Assert.AreEqual(remainingAttempts, h.GetRemainingAttempts());
+            Hangman h = new Hangman("secret");
+            Assert.AreEqual("-e--e-", h.Guess('e')); 
+            Assert.AreEqual("se--e-", h.Guess('s'));
+            Assert.AreEqual("se-re-", h.Guess('r')); 
+            Assert.AreEqual("secre-", h.Guess('c'));
+            Assert.AreEqual("secret", h.Guess('t'));
         }
 
-        [TestCase("abc", "x", "------", 9)]
-        [TestCase("abc", "x", "------", 8)]
-        [TestCase("abc", "x", "------", 7)]
-        [TestCase("abc", "x", "------", 6)]
-        [TestCase("abc", "x", "------", 5)]
-        [TestCase("abc", "x", "------", 4)]
-        [TestCase("abc", "x", "------", 3)]
-        [TestCase("abc", "x", "------", 2)]
-        [TestCase("abc", "x", "------", 1)]
-        [TestCase("abc", "x", "------", 0)]
-        [TestCase("abc", "x", "------", 0)]
-        public void NoMoreGuessingPossibleOnceNoAttemptIsLeft(string secret, char guessedLetter, string solvedSecret, int remainingAttempts)
+        [Test]
+        public void OneGuessShouldReduceRemainingAttemptsByOne()
         {
-            Hangman h = new Hangman(secret);
-            Assert.AreEqual(solvedSecret, h.Guess(guessedLetter));
-            Assert.AreEqual(remainingAttempts, h.GetRemainingAttempts());
+            Hangman h = new Hangman("secret");
+            h.Guess('e'); Assert.AreEqual(9, h.GetRemainingAttempts(), "guess e -> -e--e-");
+            h.Guess('s'); Assert.AreEqual(8, h.GetRemainingAttempts(), "guess s -> se--e-");
+            h.Guess('r'); Assert.AreEqual(7, h.GetRemainingAttempts(), "guess s -> se-re-");
+            h.Guess('c'); Assert.AreEqual(6, h.GetRemainingAttempts(), "guess s -> secre-");
+            h.Guess('t'); Assert.AreEqual(5, h.GetRemainingAttempts(), "guess s -> secret");
+        }
+
+        [Test]
+        public void NoMoreGuessingPossibleOnceNoAttemptIsLeft()
+        {
+            Hangman h = new Hangman("abc");
+            
+            for (int c = 9; c > 0; c--)
+            {
+                h.Guess('x'); Assert.AreEqual(c, h.GetRemainingAttempts(), "attempt " + c + " guess x -> ---");
+            }
+            
+            h.Guess('x'); Assert.AreEqual(0, h.GetRemainingAttempts(), "guess x -> ---");
+            h.Guess('x'); Assert.AreEqual(0, h.GetRemainingAttempts(), "guess x -> ---");
         }
     }
 }
