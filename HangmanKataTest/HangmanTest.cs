@@ -20,7 +20,6 @@ namespace HangmanKataTest
         {
             Hangman hangman = new Hangman("GEHEIMNIS");
             Assert.AreEqual("---------", hangman.GuessedWord);
-            Assert.AreEqual("GEHEIMNIS", hangman.SearchedWord);
         }
 
         [TestMethod]

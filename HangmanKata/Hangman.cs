@@ -1,40 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace HangmanKata
 {
     public class Hangman
     {
-        public string SearchedWord { get; set; }
+        private string _searchedWord { get; set; }
         public string GuessedWord { get; set; } = String.Empty;
+        public int LimitGuess { get; } = 10;
+        private int _attempts = 0;
 
         public Hangman(string secret)
         {
-            SearchedWord = secret;
-            GuessedWord = new String('-', SearchedWord.Length);
+            _searchedWord = secret;
+            GuessedWord = new String('-', _searchedWord.Length);
         }
 
         public string Guess(char letter)
         {
-            if(SearchedWord.Contains(letter))
+            if (_searchedWord.Contains(letter))
             {
-                char[] wordArray = SearchedWord.ToCharArray();
+                if(_attempts > LimitGuess)
+                {
+                    return "You lost.";
+                }
+                _attempts++;
+
+                char[] wordArray = _searchedWord.ToCharArray();
                 string pattern = letter.ToString().ToUpper();
 
                 List<int> posArray = new List<int>();
 
-                foreach (Match m in Regex.Matches(SearchedWord, pattern))
+                foreach (Match m in Regex.Matches(_searchedWord, pattern))
                 {
                     posArray.Add(m.Index);
                 }
 
+                var guessedArray = GuessedWord.ToCharArray();
+
                 for (int i = 0; i < posArray.Count; i++)
                 {
-                    var guessedArray = GuessedWord.ToCharArray();
                     guessedArray[posArray[i]] = letter;
                     GuessedWord = new string(guessedArray);
                 }
