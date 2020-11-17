@@ -11,14 +11,11 @@ namespace HangmanKata
     {
         public string SearchedWord { get; set; }
         public string GuessedWord { get; set; } = String.Empty;
+
         public Hangman(string secret)
         {
             SearchedWord = secret;
-
-            for (int i = 0; i < SearchedWord.Length; i++)
-            {
-                GuessedWord = GuessedWord + "-";
-            }
+            GuessedWord = new String('-', SearchedWord.Length);
         }
 
         public string Guess(char letter)

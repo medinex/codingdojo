@@ -16,6 +16,14 @@ namespace HangmanKataTest
         }
 
         [TestMethod]
+        public void ConstructorShouldReturnNumberOfCharactersAsMinus()
+        {
+            Hangman hangman = new Hangman("GEHEIMNIS");
+            Assert.AreEqual("---------", hangman.GuessedWord);
+            Assert.AreEqual("GEHEIMNIS", hangman.SearchedWord);
+        }
+
+        [TestMethod]
         public void GuessLetterShouldReturnUnderscores()
         {
             Assert.AreEqual("---------", _hangman.GuessedWord);
