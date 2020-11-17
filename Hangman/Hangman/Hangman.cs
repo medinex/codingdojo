@@ -21,7 +21,7 @@ namespace Hangman
             {
                 if (caseInSensitiveSecret[c].ToString() == caseInSensitiveLetter)
                 {
-                    solvedSecret += letter;
+                    solvedSecret += _secret[c].ToString();
                 }
                 else
                 {
@@ -30,6 +30,11 @@ namespace Hangman
             }
 
             return solvedSecret;
+        }
+
+        public int GetRemainingAttempts()
+        {
+            return 9;
         }
     }
 
